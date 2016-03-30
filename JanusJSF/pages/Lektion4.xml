@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIALOG   xmlns:xi="http://www.w3.org/2001/XInclude"
+	page="Lektion4" title="Initialisieren">
+
+	<STRING name="text1" default=" X X " />
+	<STRING name="text2" default=" 1 " />
+	<STRING name="ok" default="0" />
+
+	<TRANSFORMATION name="text3"
+		class="toni.transformation.ReplacementTransformation" source="text1,text2">
+		<CLASSATTRIBUTE name="placeholder" value="X" />
+		<CLASSATTRIBUTE name="omit" value="" />
+	</TRANSFORMATION>
+
+	<ACTION if="1" at="ok" name="clear" class="toni.action.Execute"
+		foreach="text1,text2" />
+
+	<GUI>
+		<VBOX>
+			<TEXTFIELD name="text1" size="10" tooltip="Muster" />
+			<TEXTFIELD name="text2" size="10" tooltip="Geben Sie hier etwas ein" />
+			<TEXTFIELD name="text3" size="10"
+				tooltip="In das Muster eingesetzter Text" />
+
+			<TEXTFIELD name="ok" size="2" tooltip="Mit einer 1 im Feld wird bereinigt" />
+			<BUTTON call="clear" text="Bereinigen"   size="33" />
+		</VBOX>
+		<DESC>
+			Wenn Sie im mittleren Textfeld etwas eingeben
+			wird dieser Text in
+			das Muster eingesetzt und
+			in das untere Feld übernommen.
+
+			Der Schalter wird nur dann aktiv, wenn eine 1 im untersten Feld steht
+		</DESC>
+	</GUI>
+</DIALOG>

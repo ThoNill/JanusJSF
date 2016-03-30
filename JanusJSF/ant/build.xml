@@ -1,0 +1,180 @@
+<project name="JanusJSF" default="dist" basedir=".">
+	<description>
+		Erzeugt JSF
+	</description>
+
+
+	<!-- set global properties for this build -->
+	<property name="pages" location="pages" />
+	<property name="libs" location="libs" />
+	<property name="xsltsrc" location="xslt" />
+	<property name="build" location="build" />
+	<property name="buildsrc" value="${build}/java" />
+	<property name="config" location="config" />
+
+	<taskdef name="FileLister" classname="transformation.CreateOneXML" classpath="${compile_classpath}"/>
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="${compile_classpath}"/>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" /> 
+		<echo message="Source ${src} " />
+		<echo message="Source ${xsltsrc} " />
+		<echo message="Source ${pages} " />
+	</target>
+
+
+	<target name="dist" depends="init" description="erzeuge die jfs">
+		<FileLister basedir="${pages}" output="${build}/FileList.xml"
+			style="${xsltsrc}/filelist.xsl" application="testapp" />
+		
+		<xslt in="${build}/FileList.xml" out="${build}/WebContent/WEB-INF/faces-config.xml"
+			extension=".xml" style="${xsltsrc}/faces-config.xsl" />
+		<xslt in="${build}/FileList.xml" out="${build}/WebContent/WEB-INF/web.xml"
+			extension=".xml" style="${xsltsrc}/faces-web.xsl" />
+		<xslt in="${build}/FileList.xml" out="${pages}/seiten.xml"
+			extension=".xml" style="${xsltsrc}/faces-pagelist.xsl" />
+
+		<xslt basedir="${config}" scanincludeddirectories="false"
+			destdir="${buildsrc}/pages" extension=".java" style="${xsltsrc}/navigation.xsl" classpath="${compile_classpath}">
+			<factory name="org.apache.xalan.processor.TransformerFactoryImpl" />
+			<exclude name="menu.xml,call.xml" />
+
+		</xslt>
+
+		<xslt basedir="${pages}" scanincludeddirectories="false"
+			destdir="${build}/WebContent" extension=".xhtml" style="${xsltsrc}/faces-gui.xsl" classpath="${compile_classpath}">
+			<factory name="org.apache.xalan.processor.TransformerFactoryImpl" />
+			<exclude name="menu.xml,call.xml" />
+
+		</xslt>
+		<xslt basedir="${pages}" scanincludeddirectories="false" destdir="${buildsrc}/pages"
+			extension="Bean.java" style="${xsltsrc}/faces-java.xsl" classpath="${compile_classpath}">
+			<factory name="org.apache.xalan.processor.TransformerFactoryImpl" />
+
+			<exclude name="menu.xml,call.xml" />
+
+		</xslt>
+		<xslt basedir="${pages}" scanincludeddirectories="false" destdir="${buildsrc}/pages"
+			extension="PreBean.java" style="${xsltsrc}/faces-javabasis.xsl" classpath="${compile_classpath}">
+			<factory name="org.apache.xalan.processor.TransformerFactoryImpl" />
+			<exclude name="(menu|call).xml" />
+
+		</xslt>
+	</target>
+	<target name="compile" depends="init" description="erzeuge die jfs">
+		<mkdir dir="${build}/classes" />
+		
+		<javac sourcepath="" srcdir="${build}" destdir="${build}/classes"
+			source="1.6" target="1.6">
+			<include name="../../src/**/*.java" />
+			<include name="**/*.java" />
+			<exclude name="**/callBean.java" />
+			<classpath>
+				<pathelement location="${src}/JSF/libs/log4j.jar" />
+				<pathelement
+					location="${src}/JSF/libs/jboss-jsf-api_2.1_spec-2.0.1.Final.jar" />
+				<pathelement location="${src}/JSF/libs/jboss-el-api_2.2_spec-1.0.0.Final.jar" />
+			</classpath>
+
+		</javac>
+	</target>
+
+	<target name="make" depends="compile" description="erzeuge die jfs">
+		<war destfile="myapp.war" webxml="${build}/WebContent/WEB-INF/web.xml">
+			<fileset dir="${build}/WebContent">
+				<include name="*.xhtml" />
+				<include name="*.html" />
+			</fileset>
+			<lib dir="../libs">
+				<include name="**/*.jar" />
+			</lib>
+			<webinf dir="${build}/WebContent/WEB-INF">
+				<exclude name="web.xml" />
+			</webinf>
+			<classes dir="${build}/classes">
+				<include name="**/*.class" />
+			</classes>
+			<classes dir="../bin">
+				<include name="config/log4j.properties" />
+				<include name="tablemodels/*.class" />
+				<include name="toni/**/*.class" />
+				<include name="org/**/*.class" />
+				<include name="worker/**/*.class" />
+				<include name="data/**/*.class" />
+			</classes>
+
+		</war>
+	</target>
+
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" />
+
+	</target>
+
+	<target name="beschreibung" description="erzeuge Beschreibungen">
+		<basename property="foreach.name" file="${foreach}" suffix=".xml" />
+		<echo message="Foreach ${foreach} ${foreach.name}" />
+		<concat destfile="${build}/WebContent/xhtml_${foreach.name}.html">
+			<filelist files="ant/anfang.html" />
+		</concat>
+
+		<copy file="${build}/WebContent/${foreach.name}.xhtml" tofile="tempfile"
+			overwrite="true" />
+
+		<replace file="tempfile">
+			<replacefilter token="&lt;" value="&amp;lt;" />
+			<replacefilter token="&gt;" value="&amp;gt;" />
+			<replacefilter token="&quot;" value="&amp;quot;" />
+		</replace>
+
+		<concat destfile="${build}/WebContent/xhtml_${foreach.name}.html"
+			append="true">
+			<filelist files="tempfile" />
+		</concat>
+		<concat destfile="${build}/WebContent/xhtml_${foreach.name}.html"
+			append="true">
+			<filelist files="ant/ende.html" />
+		</concat>
+
+
+		<copy file="${foreach}" tofile="tempfile" overwrite="true" />
+		<replace file="tempfile">
+			<replacefilter token="&lt;" value="&amp;lt;" />
+			<replacefilter token="&gt;" value="&amp;gt;" />
+			<replacefilter token="&quot;" value="&amp;quot;" />
+
+		</replace>
+
+
+		<concat destfile="${build}/WebContent/xml_${foreach.name}.html">
+			<filelist files="ant/anfang.html" />
+		</concat>
+
+		<concat destfile="${build}/WebContent/xml_${foreach.name}.html"
+			append="true">
+			<filelist files="tempfile" />
+		</concat>
+
+		<concat destfile="${build}/WebContent/xml_${foreach.name}.html"
+			append="true">
+			<filelist files="ant/ende.html" />
+		</concat>
+	</target>
+
+
+
+
+	<target name="beschreibungen" description="erzeuge Beschreibungen">
+		<foreach target="beschreibung" inheritall="true" param="foreach">
+			<fileset dir="${pages}">
+				<include name="*.xml" />
+			</fileset>
+		</foreach>
+		<delete file="tempfile" />
+	</target>
+</project>

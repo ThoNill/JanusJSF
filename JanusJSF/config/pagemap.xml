@@ -1,0 +1,11 @@
+
+<PAGEMAP>
+
+	<PAGE name="login" goto="Lektion1" />
+	<PAGE name="Lektion1" goto="Lektion1" />
+	<PAGE name="Lektion2" goto="Lektion2" />
+	<PAGE name="Lektion3" goto="Lektion3" />
+	<PAGE name="Lektion4" goto="Lektion4" />
+	<PAGE name="Lektion5" goto="Lektion5" />
+
+</PAGEMAP>

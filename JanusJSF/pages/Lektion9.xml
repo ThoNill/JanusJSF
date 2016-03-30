@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIALOG   xmlns:xi="http://www.w3.org/2001/XInclude"
+	page="Lektion9" title="Auswahlelemente">
+
+	<MAPTABLE name="gruppe" default="1">
+		<ENTRY value="1" text="Gutschrift Fehlzahlung" />
+		<ENTRY value="2" text="Annulierung" />
+		<ENTRY value="3" text="Rueckbelastung" />
+	</MAPTABLE>
+
+	<STRING name="wert" source="gruppe.value" />
+	<STRING name="text" source="gruppe.text" />
+
+	<GUI>
+		<VBOX>
+			<COMBO name="gruppe" size="20" />
+			<RADIO name="gruppe" size="20" />
+			<LIST name="gruppe" size="20" />
+			<TEXTFIELD name="wert" size="10"  tooltip="Ausgewählter Wert" />
+			<TEXTFIELD name="text" size="10"  tooltip="Ausgewählter Text" />
+		</VBOX>
+		<DESC>
+			Sie können verschiedene Werte auf unterschiedliche Art auswählen.
+		</DESC>
+	</GUI>
+</DIALOG>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:java="http://xml.apache.org/xalan/java"
+	xmlns:p="http://primefaces.org/ui"
+	>
+
+
+	<xsl:output method="xml" indent="yes" />
+
+<xsl:template name="addId">
+  <xsl:attribute name="id">
+	<xsl:value-of select="concat('number',count(preceding::node()))" />
+  </xsl:attribute>
+</xsl:template>
+
+	<xsl:template match="DIALOG">
+		<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+			xmlns:f="http://java.sun.com/jsf/core">
+			
+			<xsl:variable name="beanname" ><xsl:value-of select="@page" />Bean</xsl:variable>
+			
+		
+			<h:head>
+				<title>
+					<xsl:value-of select="@title" />
+					
+					
+				</title>
+			</h:head>
+
+			<h:body>
+				<xsl:apply-templates select="descendant::GUI">
+					<xsl:with-param name="beanname" select="$beanname" />
+				</xsl:apply-templates>
+			</h:body>
+		</html>
+	</xsl:template>
+
+	<xsl:template match="GUI">
+		<xsl:param name="beanname"/>
+	<f:event type="preRenderView" >
+		<xsl:attribute name="listener">#{<xsl:value-of select="$beanname"></xsl:value-of>.jfsChange}</xsl:attribute>
+	</f:event>
+		
+
+<!-- 
+		<title>JSF Test Formular</title>
+		Hallo.
+		<br />
+		<br />
+		Die Zahl ist: #{param['zahl']}
+		<br />
+		Deim Browser ist ein: #{header['User-Agent']}
+		<br />
+		Das Cookie "JSESSIONID" hat den Wert: #{cookie['JSESSIONID'].value}
+		<br />
+		Der Username in der Session lautet: #{sessionScope['userName']}
+		<br />
+		Deine Session-ID ist: #{session.id}
+		<br />
+		Drei mal Sieben ist: #{3*7}
+		<br />
+		<br />
+		<a href="index.jsf?zahl=12">klick mich</a>
+-->
+		<xsl:apply-templates select="child::*">
+			<xsl:with-param name="beanname" select="$beanname" />
+		</xsl:apply-templates>
+	</xsl:template>
+
+	<xsl:template match="VBOX">
+     		<xsl:param name="beanname"/>
+
+		<h:panelGrid columns="1">
+
+     		
+			<xsl:apply-templates select="child::*">
+				<xsl:with-param name="beanname" select="$beanname" />
+			</xsl:apply-templates>
+
+		</h:panelGrid>
+
+	</xsl:template>
+
+	<xsl:template match="HBOX">
+			<xsl:param name="beanname"/>
+
+		<h:panelGrid columns="{count(child::*)}">
+		
+			
+			<xsl:apply-templates select="child::*">
+			<xsl:with-param name="beanname" select="$beanname" />
+			</xsl:apply-templates>
+		</h:panelGrid>
+
+	</xsl:template>
+
+
+	<xsl:template match="GLUE">
+     		<xsl:param name="beanname"/>
+
+			<xsl:apply-templates select="child::*">
+				<xsl:with-param name="beanname" select="$beanname" />
+			</xsl:apply-templates>
+
+	</xsl:template>
+
+	<xsl:template match="LABEL">
+		<xsl:param name="beanname"/>
+		<h:outputText  value="{@text}" >
+		<xsl:call-template name="addId" />
+		</h:outputText>
+	</xsl:template>
+
+	<xsl:template match="TEXTFIELD">
+		<xsl:param name="beanname"/>
+		<h:form id="form{java:X.SL.uid()}" >
+
+		<h:inputText   label="{@title}" size="20" value="{java:X.SL.fbeanprop($beanname,@name)}" >
+			<xsl:call-template name="addId" />
+		<p:tooltip for="{concat('number',count(preceding::node()))}" value="{@title}" showEffect="slide" hideEffect="slide" />
+	
+		</h:inputText>
+		</h:form>
+
+
+	</xsl:template>
+
+	<xsl:template match="INTFIELD">
+<xsl:param name="beanname"/>
+<h:form id="form{java:X.SL.uid()}" >
+		<h:inputText  label="{@title}" size="20"  value="{java:X.SL.fbeanprop($beanname,@name)}" >
+				<f:convertNumber />
+				<xsl:call-template name="addId" />
+		</h:inputText>
+</h:form>
+	</xsl:template>
+
+	<xsl:template match="BUTTON">
+	<xsl:param name="beanname"/>
+		<h:form id="form{java:X.SL.uid()}" >
+		<h:commandButton  action="{java:X.SL.fbeancall($beanname,@call)}" value="{@text}">
+<xsl:call-template name="addId" />
+		</h:commandButton>
+		</h:form>		
+	</xsl:template>
+
+	<xsl:template match="LIST">
+	<xsl:param name="beanname"/>
+	<xsl:variable name="vname" select="@name"/>
+<h:form id="form{java:X.SL.uid()}" >
+		<h:selectOneListbox >
+	<xsl:call-template name="addId" />
+		<xsl:attribute name="value">#{<xsl:value-of
+				select="$beanname" />.<xsl:value-of
+				select="@name" />}</xsl:attribute>
+			<xsl:apply-templates select="//MAPTABLESET/MAPTABLE[@name=$vname]" >
+			<xsl:with-param name="beanname" select="$beanname" />
+			</xsl:apply-templates>
+		</h:selectOneListbox>
+		</h:form>
+	</xsl:template>
+	
+		<xsl:template match="COMBO">
+	<xsl:param name="beanname"/>
+	<xsl:variable name="vname" select="@name"/>
+<h:form id="form{java:X.SL.uid()}" >		
+	 <h:selectOneMenu  >
+	<xsl:call-template name="addId" />
+	
+		<xsl:attribute name="value">#{<xsl:value-of
+				select="$beanname" />.<xsl:value-of
+				select="@name" />.maptable}</xsl:attribute>
+				
+	 <f:selectItems var="player" >
+	 <xsl:attribute name="itemLabel">#{player.text}</xsl:attribute>
+	<xsl:attribute name="itemValue">#{player.value}</xsl:attribute>			
+	 <xsl:attribute name="value">#{<xsl:value-of
+				select="$beanname" />.<xsl:value-of
+				select="@name" />.maptable}</xsl:attribute>
+	 	</f:selectItems>
+				
+	<!--  		<xsl:apply-templates select="//MAPTABLESET/MAPTABLE[@name=$vname]" >
+			<xsl:with-param name="beanname" select="$beanname" />
+			</xsl:apply-templates>-->
+	
+	 </h:selectOneMenu>
+	 </h:form>
+	</xsl:template>
+	
+		<xsl:template match="MAPTABLE">
+		<xsl:param name="beanname"/>
+			
+			<xsl:apply-templates />
+			
+	</xsl:template>
+	
+      
+	
+	<xsl:template match="ENTRY">
+					<f:selectItem>
+						<xsl:attribute name="itemValue"><xsl:value-of select="@value" /></xsl:attribute>
+					<xsl:attribute name="itemLabel"><xsl:value-of
+						select="@text" /></xsl:attribute>
+					</f:selectItem>
+				
+	</xsl:template>
+
+<xsl:template match="SHOWTABLE/COLUMN">
+<xsl:param name="beanname"/>
+    			<p:column  sortBy="{java:X.SL.fbeanprop('o',@name)}">
+    				<!-- column header -->
+    				<f:facet name="header"> <xsl:value-of	select="@header" /></f:facet>
+    				<!-- row record -->
+    				
+    				<h:outputText >
+    				<xsl:attribute name="value">#{o.<xsl:value-of select="java:X.SL.firstLower(@name)" />}</xsl:attribute>
+    				
+    				<xsl:choose>
+    				  <xsl:when test="@type='MONEY'">
+	    				<xsl:attribute name="style">float:right</xsl:attribute>
+    				</xsl:when>
+    				  <xsl:otherwise>
+    				  <xsl:attribute name="style">float:left</xsl:attribute>
+    				  </xsl:otherwise>
+    				</xsl:choose>
+    				</h:outputText>
+    				
+    			</p:column>
+ 
+</xsl:template>
+
+<!--   <SHOWTABLE name="Worker.getMessages" rows="10"
+                  title="Meldungen" >
+         <COLUMN name="message" header="Meldung" type="STRING" />
+        </SHOWTABLE>
+-->
+
+<xsl:template match="SHOWTABLE">
+<xsl:param name="beanname"/>
+
+
+	<p:dataTable    var="o"
+	                paginator="true" rows="10"  
+                 
+                 rowsPerPageTemplate="5,10,15"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    			
+    			 selectionMode="single" >
+    			 <xsl:call-template name="addId" />
+    			 
+    			<xsl:variable name="uname" select="java:X.SL.firstUpper(@name)" />
+    		
+ <xsl:attribute name="value">#{<xsl:value-of	select="java:X.SL.beanprop($beanname,@name)" />}</xsl:attribute>
+ <xsl:attribute name="selection">#{<xsl:value-of	select="java:X.SL.beanprop($beanname,@name)" />.selectedItem}</xsl:attribute> 
+ <xsl:attribute name="paginatorTemplate">{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}</xsl:attribute> 
+ 
+       <f:facet name="header">  
+           <xsl:value-of	select="@title" />
+        </f:facet>  
+ 
+ <xsl:apply-templates />
+    		
+ 
+    		</p:dataTable>
+</xsl:template>
+
+</xsl:stylesheet>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIALOG  xmlns:xi="http://www.w3.org/2001/XInclude"
+	page="Lektion1" title="Update von Variablen">
+
+	<STRING name="text1" />
+	<STRING name="text2" source="text1" />
+
+	<GUI>
+		<VBOX>
+			<TEXTFIELD name="text1" size="10" tooltip="Geben Sie hier etwas ein" />
+			<TEXTFIELD name="text2" size="10" tooltip="Text von oben" />
+		</VBOX>
+
+		<DESC>
+			Wenn Sie im oberen Textfeld etwas eingeben, und mit Enter bestätigen,
+			wird dieser Text in das untere Feld übernommen		
+		</DESC>
+	</GUI>
+</DIALOG>

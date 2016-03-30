@@ -1,0 +1,6 @@
+<DIALOG page="model"  >
+
+    
+        <STRING default="Demo" name="PROGRAMNAME"/>
+     
+</DIALOG>

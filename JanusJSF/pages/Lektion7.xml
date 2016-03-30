@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIALOG   xmlns:xi="http://www.w3.org/2001/XInclude"
+	page="Lektion7" title="Initialisieren">
+
+	<STRING name="text1" default=" X X " />
+	<STRING name="text2" default=" X X " />
+
+
+	<MENU>
+		<MENU text="An und Aus">
+			<MENUITEM call="on" text="an" />
+			<MENUITEM call="off" text="aus" />
+		</MENU>
+		<MENU text="Farben">
+			<MENUITEM call="red" text="rot" />
+			<MENUITEM call="green" text="gruen" />
+		</MENU>
+		<MENU text="Farben">
+			<MENUITEM call="sichtbar" text="Sichtbar" />
+			<MENUITEM call="unsichtbar" text="Unsichtbar" />
+		</MENU>
+	</MENU>
+
+	<GUI>
+		<ACTION name="on" class="toni.gui.action.SetOn" foreach="text1,text2"
+			param="background-color:red;" />
+		<ACTION name="off" class="toni.gui.action.SetOff" foreach="text1,text2"
+			param="background-color:green;" />
+		<ACTION name="red" class="toni.gui.action.SetStyle" foreach="text1,text2"
+			param="background-color:red;" />
+		<ACTION name="green" class="toni.gui.action.SetStyle" foreach="text1,text2"
+			param="background-color:green;" />
+		<ACTION name="sichtbar" class="toni.gui.action.SetVisible"
+			foreach="text1,text2" param="background-color:red;" />
+		<ACTION name="unsichtbar" class="toni.gui.action.SetInVisible"
+			foreach="text1,text2" param="background-color:green;" />
+		<VBOX>
+			<TEXTFIELD name="text1" size="10" />
+			<TEXTFIELD name="text2" size="10" />
+			<BUTTON call="on" text="an"   size="33" />
+			<BUTTON call="off" text="aus"   size="33" />
+			<BUTTON call="red" text="rot"   size="33" />
+			<BUTTON call="green" text="gruen"   size="33" />
+			<BUTTON call="sichtbar" text="Sichtbar"   size="33" />
+			<BUTTON call="unsichtbar" text="Unsichtbar"  
+				size="33" />
+		</VBOX>
+		<DESC>
+			Durch die Schalter oder das Menü, wird die Anzeige der Felder
+			verändert.
+		</DESC>
+	</GUI>
+</DIALOG>

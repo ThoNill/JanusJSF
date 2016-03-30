@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIALOG   xmlns:xi="http://www.w3.org/2001/XInclude"
+	page="Lektion5" title="Initialisieren">
+
+	<STRING name="text1" default=" X X " />
+	<STRING name="text2" source="sucheBean.concatenation" />
+
+	<BEAN name="musterBean" class="toni.worker.ConcatWorker">
+		<CALL name="muster" command="suchen">
+			<SET var="a" to="text1" />
+			<SET var="b" constant="1" />
+		</CALL>
+	</BEAN>
+
+	<GUI>
+		<VBOX>
+			<TEXTFIELD name="text1" size="10" tooltip="Muster" />
+			<TEXTFIELD name="text2" size="10" tooltip="Ergebnis" />
+			<BUTTON call="muster" text="Einsetzen"   size="33" />
+		</VBOX>
+		<DESC>
+			Wenn Sie im Muster etwas eingeben, wird das Muster
+			durch den Text ersetzt und in das untere Feld eingesetzt,
+			wenn Sie den Schalter betätigen.
+		</DESC>
+	</GUI>
+</DIALOG>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIALOG   xmlns:xi="http://www.w3.org/2001/XInclude"
+	page="Lektion10" title="Tabelle">
+
+	<STRING name="wert" source="tabelle.Buchungsnummer" />
+	<STRING name="text" source="tabelle.abzusetzungsid" />
+
+	<SQL name="tabelle" prepare="false" countOn="true" maxCount="all"
+		stmt=" ">
+		<COLUMN name="Buchungsnummer" />
+		<COLUMN name="abzusetzungsid" />
+		<COLUMN name="monat" />
+		<COLUMN name="jahr" />
+		<COLUMN name="suchwort" />
+		<COLUMN name="betrag" />
+	</SQL>
+
+	<GUI>
+		<VBOX>
+			<TEXTFIELD name="wert" size="10" tooltip="Ausgewählter Wert" />
+			<TEXTFIELD name="text" size="10"  tooltip="Ausgewählter Wert" />
+			<SHOWTABLE name="tabelle" rows="8" title="Absetzungen"
+				width="842" height="200">
+				<COLUMN name="monat" header="Monat" type="INT" />
+				<COLUMN name="jahr" header="Jahr" type="INT" />
+				<COLUMN name="Buchungsnummer" header="Buchung" type="INT" />
+				<COLUMN name="abzusetzungsid" header="Absetzung" type="INT" />
+				<COLUMN name="suchwort" header="Kunde" type="STRING" />
+				<COLUMN name="betrag" header="Betrag" type="MONEY" />
+			</SHOWTABLE>
+		</VBOX>
+		<DESC>
+			Eine Tabelle, dücken der Buttons wählt aus.
+		</DESC>
+	</GUI>
+</DIALOG>

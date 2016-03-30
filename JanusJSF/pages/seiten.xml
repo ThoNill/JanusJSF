@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><DIALOG url="TestServlet" page="seiten" title="Tabelle" xmlns:xi="http://www.w3.org/2001/XInclude">
+<NAMESPACE prefix="toni.data.tags.Data">
+<BEANSET>
+<BEAN name="sucheBean" class="toni.worker.VerteilerCall">
+
+
+		<CALL command="go" name="callseiten">
+<SET var="name" constant="seiten.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLseiten">
+<SET var="name" constant="xml_seiten.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlseiten">
+<SET var="name" constant="xhtml_seiten.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion4">
+<SET var="name" constant="Lektion4.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion4">
+<SET var="name" constant="xml_Lektion4.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion4">
+<SET var="name" constant="xhtml_Lektion4.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion9">
+<SET var="name" constant="Lektion9.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion9">
+<SET var="name" constant="xml_Lektion9.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion9">
+<SET var="name" constant="xhtml_Lektion9.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion1">
+<SET var="name" constant="Lektion1.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion1">
+<SET var="name" constant="xml_Lektion1.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion1">
+<SET var="name" constant="xhtml_Lektion1.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion5">
+<SET var="name" constant="Lektion5.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion5">
+<SET var="name" constant="xml_Lektion5.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion5">
+<SET var="name" constant="xhtml_Lektion5.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion10">
+<SET var="name" constant="Lektion10.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion10">
+<SET var="name" constant="xml_Lektion10.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion10">
+<SET var="name" constant="xhtml_Lektion10.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion3">
+<SET var="name" constant="Lektion3.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion3">
+<SET var="name" constant="xml_Lektion3.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion3">
+<SET var="name" constant="xhtml_Lektion3.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion6">
+<SET var="name" constant="Lektion6.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion6">
+<SET var="name" constant="xml_Lektion6.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion6">
+<SET var="name" constant="xhtml_Lektion6.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion8">
+<SET var="name" constant="Lektion8.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion8">
+<SET var="name" constant="xml_Lektion8.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion8">
+<SET var="name" constant="xhtml_Lektion8.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion2">
+<SET var="name" constant="Lektion2.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion2">
+<SET var="name" constant="xml_Lektion2.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion2">
+<SET var="name" constant="xhtml_Lektion2.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callmodel">
+<SET var="name" constant="model.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLmodel">
+<SET var="name" constant="xml_model.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlmodel">
+<SET var="name" constant="xhtml_model.xhtml"/>
+</CALL> 
+		
+	
+
+		<CALL command="go" name="callLektion7">
+<SET var="name" constant="Lektion7.xhtml"/>
+</CALL>
+<CALL command="show" name="callXMLLektion7">
+<SET var="name" constant="xml_Lektion7.xhtml"/>
+</CALL>
+<CALL command="show" name="callXhtmlLektion7">
+<SET var="name" constant="xhtml_Lektion7.xhtml"/>
+</CALL> 
+		
+	</BEAN>
+</BEANSET>
+</NAMESPACE>
+<GUI>
+<VBOX>
+
+
+		<HBOX>
+<LINK size="33" value="seiten.jsf" text="zur Demo seiten"/>
+<LINK size="33" value="xml_seiten.html" text="Anzeige XML  seiten"/>
+<LINK size="33" value="xhtml_seiten.html" text="Anzeige JSF XHTML  seiten"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion4.jsf" text="zur Demo Lektion4"/>
+<LINK size="33" value="xml_Lektion4.html" text="Anzeige XML  Lektion4"/>
+<LINK size="33" value="xhtml_Lektion4.html" text="Anzeige JSF XHTML  Lektion4"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion9.jsf" text="zur Demo Lektion9"/>
+<LINK size="33" value="xml_Lektion9.html" text="Anzeige XML  Lektion9"/>
+<LINK size="33" value="xhtml_Lektion9.html" text="Anzeige JSF XHTML  Lektion9"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion1.jsf" text="zur Demo Lektion1"/>
+<LINK size="33" value="xml_Lektion1.html" text="Anzeige XML  Lektion1"/>
+<LINK size="33" value="xhtml_Lektion1.html" text="Anzeige JSF XHTML  Lektion1"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion5.jsf" text="zur Demo Lektion5"/>
+<LINK size="33" value="xml_Lektion5.html" text="Anzeige XML  Lektion5"/>
+<LINK size="33" value="xhtml_Lektion5.html" text="Anzeige JSF XHTML  Lektion5"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion10.jsf" text="zur Demo Lektion10"/>
+<LINK size="33" value="xml_Lektion10.html" text="Anzeige XML  Lektion10"/>
+<LINK size="33" value="xhtml_Lektion10.html" text="Anzeige JSF XHTML  Lektion10"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion3.jsf" text="zur Demo Lektion3"/>
+<LINK size="33" value="xml_Lektion3.html" text="Anzeige XML  Lektion3"/>
+<LINK size="33" value="xhtml_Lektion3.html" text="Anzeige JSF XHTML  Lektion3"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion6.jsf" text="zur Demo Lektion6"/>
+<LINK size="33" value="xml_Lektion6.html" text="Anzeige XML  Lektion6"/>
+<LINK size="33" value="xhtml_Lektion6.html" text="Anzeige JSF XHTML  Lektion6"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion8.jsf" text="zur Demo Lektion8"/>
+<LINK size="33" value="xml_Lektion8.html" text="Anzeige XML  Lektion8"/>
+<LINK size="33" value="xhtml_Lektion8.html" text="Anzeige JSF XHTML  Lektion8"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion2.jsf" text="zur Demo Lektion2"/>
+<LINK size="33" value="xml_Lektion2.html" text="Anzeige XML  Lektion2"/>
+<LINK size="33" value="xhtml_Lektion2.html" text="Anzeige JSF XHTML  Lektion2"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="model.jsf" text="zur Demo model"/>
+<LINK size="33" value="xml_model.html" text="Anzeige XML  model"/>
+<LINK size="33" value="xhtml_model.html" text="Anzeige JSF XHTML  model"/>
+</HBOX> 
+		
+	
+
+		<HBOX>
+<LINK size="33" value="Lektion7.jsf" text="zur Demo Lektion7"/>
+<LINK size="33" value="xml_Lektion7.html" text="Anzeige XML  Lektion7"/>
+<LINK size="33" value="xhtml_Lektion7.html" text="Anzeige JSF XHTML  Lektion7"/>
+</HBOX> 
+		
+	</VBOX>
+</GUI>
+</DIALOG>
