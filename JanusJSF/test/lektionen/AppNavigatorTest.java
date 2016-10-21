@@ -1,12 +1,10 @@
 package lektionen;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import pages.AppNavigator;
-import toni.jsf.navigation.Navigator;
 import toni.worker.basis.DefaultWorker;
 
 public class AppNavigatorTest {

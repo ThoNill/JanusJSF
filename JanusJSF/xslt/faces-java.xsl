@@ -59,7 +59,7 @@
 	import toni.basis.ActionWithPriority;
 	import toni.jsf.basis.AllBasis;
 	import toni.basis.ClassFabrik;
-	import java.util.Hashtable;
+	import java.util.HashMap;
 	import org.xml.sax.Attributes;
 	import org.xml.sax.helpers.AttributesImpl;
 	import toni.action.Action;
@@ -337,8 +337,8 @@
 
    	<xsl:call-template name="configuration" />
 
-    private Hashtable&lt;String,Object&gt; getParameterFor<xsl:value-of select="$objid" />() {
-        Hashtable&lt;String,Object&gt; h = new Hashtable&lt;String,Object&gt;();
+    private HashMap&lt;String,Object&gt; getParameterFor<xsl:value-of select="$objid" />() {
+        HashtMap&lt;String,Object&gt; h = new HashMap&lt;String,Object&gt;();
         
 		<xsl:apply-templates select="child::*">
 			<xsl:with-param name="beanname" select="$beanname" />
@@ -745,9 +745,9 @@ public class Data<xsl:value-of select="$beanname" />_<xsl:value-of select="$unam
 	
 	<xsl:for-each select="descendant::*/BEAN/CALL[@name=$ref]">
 	
-	private Hashtable  hash<xsl:value-of select="$batchname" />_<xsl:value-of select="$on" /> () {
+	private HashMap&lt;String,Object&gt;  hash<xsl:value-of select="$batchname" />_<xsl:value-of select="$on" /> () {
 	
-	Hashtable h = new Hashtable();
+	HashMap&lt;String,Object&gt; h = new HashMap&lt;String,Object&gt;();
 	<xsl:for-each select="descendant::SET">
 		
 		<xsl:if test="@to">
@@ -774,7 +774,7 @@ import javax.swing.table.TableModel;
 import toni.tablemodels.DataBasis;
 import toni.batch.Batch;
 import org.xml.sax.Attributes;
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class Batch<xsl:value-of select="$beanname" />Basis_<xsl:value-of select="$batchname" /> extends Batch {
 	
@@ -790,7 +790,7 @@ public class Batch<xsl:value-of select="$beanname" />Basis_<xsl:value-of select=
 	return table;
 	}
 	 
-	protected Hashtable&lt;String, Object&gt;  hashFor_run (Hashtable&lt;String, Object&gt; h) {
+	protected HashMap&lt;String, Object&gt;  hashFor_run (HashMap&lt;String, Object&gt; h) {
 		
 	<xsl:for-each select="descendant::SET">
 		

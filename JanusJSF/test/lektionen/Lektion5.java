@@ -1,11 +1,9 @@
 package lektionen;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import pages.Lektion3Bean;
 import pages.Lektion5Bean;
 
 public class Lektion5 {
